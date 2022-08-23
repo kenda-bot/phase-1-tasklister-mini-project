@@ -1,20 +1,25 @@
 // document.addEventListener("DOMContentLoaded", () => {
-//   document.querySelector('form').addEventListener('submit', (e) =>{
-//     e.preventdefault()
-//   })
-// });
-document.querySelector("form").addEventListener("submit", (e) => {
+//  
+  let form =document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault()
-  const inputfield = document.getElementById("new-task-description").value;
-  document.getElementById('tasks').innerHTML += `
-     <li>${inputfield}</li>
 
+  const newTask = document.getElementById("new-task-description").value;
+  console.log(newTask)
+  buildTasks(newTask)
+  })
 
-`
-  document.getElementById("new-task-description").value = ''
+  function buildTasks(task){
+    const li= document.createElement('li');
+    li.textContent=task;
 
-})
+    const button=document.createElement('button');
+    button.addEventListener("click" ,handleDelete);
+    button.textContent='x'
 
-
-
-});
+     li.appendChild(button)
+    const theList=document .querySelector('#tasks')
+    theList.appendChild(li)
+  }
+  function handleDelete(event){
+    event.target.parentNode.remove();
+  }
